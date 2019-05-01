@@ -1,0 +1,25 @@
+require(treeio) #latest version from GitHub necessary (implements 'read.astral')
+
+require(ape)
+
+x <- read.astral("Astral_50_75_t4.tre")
+
+pp1 <- as.numeric(x[['pp1']])
+
+pp2 <- as.numeric(x[['pp2']])
+
+pp3 <- as.numeric(x[['pp3']])
+
+pc <- cbind( pp1, pp2, pp3)
+
+tree <- root(x@phylo, "ROOT_SAMPLE_ID") #root tree
+
+png("Astral50_t4.png", width = 2480, height = 2480)
+
+par(lty = "blank") #no lines in pie charts
+
+plot(tree, cex = 2)
+
+nodelabels(pie = pc, adj = c(0.6,0.5), piecol = c("cornflowerblue","cadetblue2","aliceblue"), cex = 0.5)
+
+dev.off()
