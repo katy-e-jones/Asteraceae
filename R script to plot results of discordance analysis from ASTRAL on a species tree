@@ -2,7 +2,7 @@ require(treeio) #latest version from GitHub necessary (implements 'read.astral')
 
 require(ape)
 
-x <- read.astral("Astral_50_75_t4.tre")
+x <- read.astral("Astral_50_75_t4.tre") # read ASTRAL tree from -t4 analysis
 
 pp1 <- as.numeric(x[['pp1']])
 
@@ -12,9 +12,9 @@ pp3 <- as.numeric(x[['pp3']])
 
 pc <- cbind( pp1, pp2, pp3)
 
-tree <- root(x@phylo, "ROOT_SAMPLE_ID") #root tree
+tree <- root(x@phylo, "ROOT_SAMPLE_ID") #provide sample name to root tree 
 
-png("Astral50_t4.png", width = 2480, height = 2480)
+png("Astral_50_t4.png", width = 2480, height = 2480) #generate .png file
 
 par(lty = "blank") #no lines in pie charts
 
