@@ -1,5 +1,5 @@
-######## MODELING VARIABLES RELATED TO LAB WORK AND TESTING THE IMPACT OF FACTORS SUCH AS TISSUE TYPE, MULTIPLEXING, SEQUENCING PLATFORM#######
-################################################# ON TARGET CAPTURE SUCCESS ###################################################################
+########MODELING VARIABLES RELATED TO LAB WORK AND TESTING THE IMPACT OF FACTORS SUCH AS TISSUE TYPE, MULTIPLEXING, SEQUENCING PLATFORM#######
+################################################# ON TARGET CAPTURE SUCCESS ##################################################################
 
 # A regression model can be built using brms (see references below) to test for the impact of multiple steps in the lab on the success of 
 # hybrid / target capture for many samples, which can be used a guide to optimise lab steps.
@@ -21,15 +21,14 @@ library(brms)
 read.table("cos_lab_all_final.csv", header=T, sep=",") -> cos_lab_all
 
 #run brms
-
 cp_recovered_sampleinfo_condkit<-brm(per_coveredplastome_scaled~Sample_info + (1|Probe_kit_version_.1.3.), data = cos_lab_all, family = gaussian(),  warmup = 1000, iter = 2000, chains = 4 , control=list(adapt_delta=0.999))
 
+##explanation of parts of the brms script above:
 #name of analysis used later to check results = cp_recovered_sampleinfo_condkit
 #group variable = Probe_kit_version_.1.3. (probe kit version 1-3)
 #predictor variable = Sample_info (leaf material: herbarium, fresh or silica-dried)
 #response variable = per_coveredplastome_scaled (percentage of plastome recovered among many samples)
 
 # check results of brms regression model 
-
 summary(cp_recovered_sampleinfo_condgroup)
 marginal_effects(cp_recovered_sampleinfo_condgroup)
